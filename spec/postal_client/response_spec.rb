@@ -13,7 +13,7 @@ describe PostalClient::Response do
 
     it "returns a postal district from the json body" do
       response = PostalClient::Response.new(client_response)
-      expect(response.postal_district.id).to eq("2830")
+      expect(response.data.id).to eq("2830")
     end
   end
 
