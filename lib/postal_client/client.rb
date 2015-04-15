@@ -8,8 +8,11 @@ module PostalClient
     end
 
     def get_postal_district(postal_district_slug)
-      path = postal_district_path(postal_district_slug)
-      Response.new(client.get(path))
+      get_postal_data "postal_districts", postal_district_slug
+    end
+
+    def get_postal_area(postal_area_slug)
+      get_postal_data "postal_areas", postal_area_slug
     end
 
     def get_postal_district_by_key(postal_district_key)
@@ -19,16 +22,21 @@ module PostalClient
 
     private
 
-    def postal_district_path(slug)
-      [postal_districts_path, slug].join("/")
+    def get_postal_data(postal_resource_name, slug)
+      path = postal_data_path(postal_resource_name, slug)
+      Response.new(client.get(path))
+    end
+
+    def postal_data_path(postal_resource_name, slug)
+      [postal_resource_path(postal_resource_name), slug].join("/")
     end
 
     def postal_district_by_key_path(key)
-      [postal_districts_path, "by_key", key].join("/")
+      [postal_resource_path("postal_districts"), "by_key", key].join("/")
     end
 
-    def postal_districts_path
-      ["api", site_key, "postal_districts"].join("/")
+    def postal_resource_path(name)
+      ["api", site_key, name].join("/")
     end
 
     def client

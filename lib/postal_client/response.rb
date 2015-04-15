@@ -10,7 +10,7 @@ module PostalClient
       client_response.status == 200
     end
 
-    def postal_district
+    def data
       OpenStruct.new(JSON.parse(client_response.body))
     end
   end
