@@ -11,6 +11,10 @@ module PostalClient
       get_postal_data "postal_districts", postal_district_slug
     end
 
+    def get_postal_area(postal_area_slug)
+      get_postal_data "postal_areas", postal_area_slug
+    end
+
     def get_postal_district_by_key(postal_district_key)
       path = postal_district_by_key_path(postal_district_key)
       Response.new(client.get(path))
